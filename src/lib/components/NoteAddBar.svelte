@@ -29,6 +29,12 @@
 	};
 </script>
 
+<!--
+	NoteaAddBar ist ultra cancer gerade, lass das irgendwie anders machen
+	Man muss statt textarea div mit contenteditable benutzen damit es automatisch ohne scrollbar resized, aber dadurch werden die events irgendwie buggy und man muss statt bind:value bind:innerHTML machen was auch weird ist und so
+	ist eh ultra cringe wie das so expanded
+-->
+
 <div class="bar">
 	{#if isBarExpanded}
 		<input type="text" placeholder="Title" bind:value={noteTitle} />
