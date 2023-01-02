@@ -15,7 +15,7 @@
     border: vars.$misc-border-default
     border-radius: vars.$misc-borderRadius
     color: vars.$color-text-2
-    padding: vars.$misc-padding
+    padding: vars.$misc-padding-default
     cursor: pointer
     &:hover
       box-shadow: 0 4px 7px transparentize(vars.$color-dark-9, 0.2)
