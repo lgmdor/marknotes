@@ -1,19 +1,23 @@
 <script>
-	let noteName = '';
+	import { notes } from './../../stores.js';
+
+	let noteText = '';
 
 	const addNote = (e) => {
 		if (e.key === 'Enter') {
+			notes.update((notes) => [...notes, noteText]);
+			console.log($notes);
 			clearInput();
 		}
 	};
 
 	const clearInput = () => {
-		noteName = '';
+		noteText = '';
 	};
 </script>
 
 <div class="bar">
-	<input type="text" placeholder="Add note..." bind:value={noteName} on:keydown={addNote} />
+	<input type="text" placeholder="Add note..." bind:value={noteText} on:keydown={addNote} />
 </div>
 
 <style lang="sass">
@@ -22,7 +26,7 @@
 .bar
   height: vars.$size-2
   width: 50vw
-  border: 2px solid vars.$color-dark-4
+  border: vars.$misc-border-default
   border-radius: vars.$misc-borderRadius
   input
     height: 100%
