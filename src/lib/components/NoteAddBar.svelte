@@ -1,5 +1,19 @@
+<script>
+	let noteName = '';
+
+	const addNote = (e) => {
+		if (e.key === 'Enter') {
+			clearInput();
+		}
+	};
+
+	const clearInput = () => {
+		noteName = '';
+	};
+</script>
+
 <div class="bar">
-	<input type="text" placeholder="Add note..." />
+	<input type="text" placeholder="Add note..." bind:value={noteName} on:keydown={addNote} />
 </div>
 
 <style lang="sass">
