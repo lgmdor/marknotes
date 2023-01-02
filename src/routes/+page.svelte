@@ -4,14 +4,15 @@
 	import NoteAddPopup from '$lib/components/NoteAddPopup.svelte';
 	import { notes } from './../stores.js';
 
-	let showPopup = false;
+	let isPopupVisible = false;
+
+	const showPopup = () => (isPopupVisible = true);
+	const hidePopup = () => (isPopupVisible = false);
 </script>
 
-<Button text="New Note" />
+<Button text="New Note" onclick={showPopup} />
 
-{#if showPopup}
-	<NoteAddPopup />
-{/if}
+<NoteAddPopup {isPopupVisible} on:hidePopup={hidePopup} />
 <section>
 	{#each $notes.reverse() as note (note)}
 		<Note text={note} />
