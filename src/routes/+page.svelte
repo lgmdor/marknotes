@@ -1,10 +1,17 @@
 <script>
-	import NoteAddBar from '$lib/components/NoteAddBar.svelte';
 	import Note from '$lib/components/Note.svelte';
+	import Button from '$lib/components/Button.svelte';
+	import NoteAddPopup from '$lib/components/NoteAddPopup.svelte';
 	import { notes } from './../stores.js';
+
+	let showPopup = false;
 </script>
 
-<NoteAddBar />
+<Button text="New Note" />
+
+{#if showPopup}
+	<NoteAddPopup />
+{/if}
 <section>
 	{#each $notes.reverse() as note (note)}
 		<Note text={note} />
