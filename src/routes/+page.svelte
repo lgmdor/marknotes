@@ -4,7 +4,7 @@
 	import NoteAddPopup from '$lib/components/NoteAddPopup.svelte';
 	import { notes } from './../stores.js';
 
-	let isPopupVisible = false;
+	let isPopupVisible = true;
 
 	const showPopup = () => (isPopupVisible = true);
 	const hidePopup = () => (isPopupVisible = false);

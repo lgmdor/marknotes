@@ -1,13 +1,11 @@
 <script>
-	import MarkdownIt from 'markdown-it';
-
-	const md = new MarkdownIt();
+	import SvelteMarkdown from 'svelte-markdown';
 
 	export let text;
 </script>
 
 <div class="note">
-	{@html md.render(text)}
+	<SvelteMarkdown source={text} />
 </div>
 
 <style lang="sass">

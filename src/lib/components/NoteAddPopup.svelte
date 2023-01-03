@@ -1,31 +1,21 @@
 <script>
 	import { createEventDispatcher, onMount } from 'svelte';
-	import MarkdownIt from 'markdown-it';
 	import Button from './Button.svelte';
 	import { notes } from './../../stores.js';
+	import SvelteMarkdown from 'svelte-markdown';
 
 	export let isPopupVisible = false;
 
 	const dispatch = createEventDispatcher();
+
 	const hidePopup = (e) => {
 		dispatch('hidePopup');
 		clearEditor();
 	};
 
-	const md = new MarkdownIt();
+	let mdInput = '';
 
-	let mdInput,
-		mdOutput = '';
-
-	let elInput, elOutput;
-
-	$: mdInput, updateMdOutput();
-
-	const updateMdOutput = () => {
-		if (elOutput) {
-			elOutput.innerHTML = md.render(mdInput);
-		}
-	};
+	let elInput;
 
 	const saveNote = () => {
 		notes.update((notes) => [...notes, mdInput]);
@@ -56,7 +46,9 @@
 					bind:value={mdInput}
 					bind:this={elInput}
 				/>
-				<div class="preview" bind:this={elOutput} />
+				<div class="preview">
+					<SvelteMarkdown source={mdInput} />
+				</div>
 			</div>
 			<div class="bottom">
 				<div class="cancel">
