@@ -1,12 +1,18 @@
 <script>
 	import { createEventDispatcher, onMount } from 'svelte';
 	import Button from './Button.svelte';
+	import MdPreview from './MdPreview.svelte';
 	import { notes } from './../../stores.js';
 	import SvelteMarkdown from 'svelte-markdown';
 
 	export let isPopupVisible = false;
 
 	const dispatch = createEventDispatcher();
+
+	const svelteMarkdownOptions = {
+		//https://marked.js.org/using_advanced#options
+		headerIds: false
+	};
 
 	const hidePopup = (e) => {
 		dispatch('hidePopup');
@@ -41,13 +47,15 @@
 		<div class="popup">
 			<div class="main">
 				<textarea
-					class="editor"
+					class="md-editor"
 					placeholder="Write something..."
 					bind:value={mdInput}
 					bind:this={elInput}
 				/>
-				<div class="preview">
-					<SvelteMarkdown source={mdInput} />
+				<div class="wrap">
+					<MdPreview>
+						<SvelteMarkdown source={mdInput} options={svelteMarkdownOptions} />
+					</MdPreview>
 				</div>
 			</div>
 			<div class="bottom">
@@ -85,10 +93,10 @@ $color-bg: vars.$color-dark-7
 		.main
 			display: flex
 			flex: 1
-			.editor, .preview
+			.md-editor, .wrap
 				flex: 1
 				padding: vars.$misc-padding-default
-			.editor
+			.md-editor
 				resize: none
 				background: $color-bg
 				border: none
@@ -96,9 +104,8 @@ $color-bg: vars.$color-dark-7
 				font-family: "Lato"
 				color: vars.$color-text-2
 				font-size: 1rem
-			.preview
+			.wrap
 				border-left: vars.$misc-border-dark
-				line-height: 1.6
 		.bottom
 			height: vars.$size-4
 			display: flex
