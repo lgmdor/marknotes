@@ -102,9 +102,11 @@ $color-bg: vars.$color-dark-7
 				background: $color-bg
 				border: none
 				outline: none
-				font-family: "Lato"
+				font-family: "Roboto Slab"
 				color: vars.$color-text-2
 				font-size: 1rem
+				line-height: calc(1em + 1ex)
+				//white-space: pre
 			.wrap
 				border-left: vars.$misc-border-dark
 		.bottom

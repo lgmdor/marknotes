@@ -17,5 +17,5 @@
   justify-content: flex-start
   align-items: center
   flex-direction: column
-  font-family: "Lato"
+  font-family: "Roboto"
 </style>
