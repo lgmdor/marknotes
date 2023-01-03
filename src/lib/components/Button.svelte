@@ -1,9 +1,14 @@
 <script>
 	export let text = 'Click';
 	export let onclick = () => {};
+	export let variant = 'default';
 </script>
 
-<button on:click={onclick}>{text}</button>
+<button
+	on:click={onclick}
+	class:variant-default={variant === 'default'}
+	class:variant-filled={variant === 'filled'}>{text}</button
+>
 
 <style lang="sass">
 @use '../../vars'
@@ -22,4 +27,15 @@ button
   min-width: vars.$size-6
   &:active
     transform: translateY(1px)
+  &.variant-default
+    background: vars.$color-dark-6
+    color: vars.$color-text-1
+    border: 1px solid vars.$color-dark-4
+    &:hover
+      background: transparentize(vars.$color-dark-4, 0.55)
+  &.variant-filled
+    background: vars.$color-main
+    color: vars.$color-text-1
+    &:hover
+      background: darken(vars.$color-main, 6%)
 </style>
