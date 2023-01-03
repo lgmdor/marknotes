@@ -2,6 +2,7 @@
 	import { createEventDispatcher, onMount } from 'svelte';
 	import MarkdownIt from 'markdown-it';
 	import Button from './Button.svelte';
+	import { notes } from './../../stores.js';
 
 	export let isPopupVisible = false;
 
@@ -22,6 +23,11 @@
 		if (elOutput) {
 			elOutput.innerHTML = md.render(mdInput);
 		}
+	};
+
+	const saveNote = () => {
+		notes.update((notes) => [...notes, mdInput]);
+		hidePopup();
 	};
 
 	onMount(() => {
@@ -52,7 +58,7 @@
 				<div class="cancel">
 					<Button text={'Cancel'} />
 				</div>
-				<Button variant={'filled'} text={'Save'} />
+				<Button variant={'filled'} text={'Save'} onclick={saveNote} />
 			</div>
 		</div>
 	</div>
@@ -61,22 +67,26 @@
 <style lang="sass">
 @use '../../vars'
 
+$color-bg: vars.$color-dark-7
+$color-border: vars.$color-dark-6
+
 .bg
 	position: fixed
 	inset: 0
-	background: transparentize(vars.$color-dark-7, 0.8)
+	background: transparentize(vars.$color-dark-8, 0.6)
 	display: flex
 	align-items: center
 	justify-content: center
 	.popup
 		height: vars.$size-48
 		width: vars.$size-64
-		background: vars.$color-dark-7
+		background: $color-bg
 		color: vars.$color-text-2
 		border-radius: vars.$misc-borderRadius
 		border: 1px solid vars.$color-dark-6
 		display: flex
 		flex-direction: column
+		box-shadow: vars.$misc-boxShadow
 		.main
 			display: flex
 			flex: 1
@@ -85,21 +95,21 @@
 				padding: vars.$misc-padding-default
 			.editor
 				resize: none
-				background: vars.$color-dark-7
+				background: $color-bg
 				border: none
 				outline: none
 				font-family: "Lato"
 				color: vars.$color-text-2
 				font-size: 1rem
 			.preview
-				border-left: 1px solid vars.$color-dark-6
+				border-left: 1px solid $color-border
 				line-height: 1.6
 		.bottom
 			height: vars.$size-4
 			display: flex
 			justify-content: flex-end
 			align-items: center
-			border-top: 1px solid vars.$color-dark-6
+			border-top: 1px solid $color-border
 			padding: 0 vars.$misc-padding-default
 			.cancel
 				margin-right: vars.$size-1
