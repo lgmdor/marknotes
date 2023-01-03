@@ -43,7 +43,8 @@
 </script>
 
 {#if isPopupVisible}
-	<div class="bg" on:click|self={hidePopup} aria-hidden="true">
+	<!--<div class="bg" on:click|self={hidePopup} aria-hidden="true">-->
+	<div class="bg" aria-hidden="true">
 		<div class="popup">
 			<div class="main">
 				<textarea
