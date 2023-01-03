@@ -10,7 +10,7 @@
 	const hidePopup = () => (isPopupVisible = false);
 </script>
 
-<Button text="New Note" onclick={showPopup} />
+<Button text="New Note" onclick={showPopup} variant={'filled'} />
 
 <NoteAddPopup {isPopupVisible} on:hidePopup={hidePopup} />
 <section>

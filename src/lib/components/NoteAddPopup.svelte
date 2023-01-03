@@ -7,9 +7,11 @@
 	export let isPopupVisible = false;
 
 	const dispatch = createEventDispatcher();
-	const hidePopup = (e) => dispatch('hidePopup');
+	const hidePopup = (e) => {
+		dispatch('hidePopup');
+		clearEditor();
+	};
 
-	//--------
 	const md = new MarkdownIt();
 
 	let mdInput,
@@ -30,9 +32,11 @@
 		hidePopup();
 	};
 
+	const clearEditor = () => (mdInput = '');
+
 	onMount(() => {
+		//console heult hier
 		elInput.addEventListener('keydown', (e) => {
-			console.log(e.key);
 			if (e.key === 'Tab') {
 				e.preventDefault();
 
@@ -48,7 +52,7 @@
 			<div class="main">
 				<textarea
 					class="editor"
-					placeholder="Enter text..."
+					placeholder="Write something..."
 					bind:value={mdInput}
 					bind:this={elInput}
 				/>
@@ -56,7 +60,7 @@
 			</div>
 			<div class="bottom">
 				<div class="cancel">
-					<Button text={'Cancel'} />
+					<Button text={'Cancel'} onclick={hidePopup} />
 				</div>
 				<Button variant={'filled'} text={'Save'} onclick={saveNote} />
 			</div>
@@ -68,12 +72,11 @@
 @use '../../vars'
 
 $color-bg: vars.$color-dark-7
-$color-border: vars.$color-dark-6
 
 .bg
 	position: fixed
 	inset: 0
-	background: transparentize(vars.$color-dark-8, 0.6)
+	background: transparentize(vars.$color-dark-8, 0.4)
 	display: flex
 	align-items: center
 	justify-content: center
@@ -83,7 +86,7 @@ $color-border: vars.$color-dark-6
 		background: $color-bg
 		color: vars.$color-text-2
 		border-radius: vars.$misc-borderRadius
-		border: 1px solid vars.$color-dark-6
+		border: vars.$misc-border-dark
 		display: flex
 		flex-direction: column
 		box-shadow: vars.$misc-boxShadow
@@ -102,14 +105,14 @@ $color-border: vars.$color-dark-6
 				color: vars.$color-text-2
 				font-size: 1rem
 			.preview
-				border-left: 1px solid $color-border
+				border-left: vars.$misc-border-dark
 				line-height: 1.6
 		.bottom
 			height: vars.$size-4
 			display: flex
 			justify-content: flex-end
 			align-items: center
-			border-top: 1px solid $color-border
+			border-top: vars.$misc-border-dark
 			padding: 0 vars.$misc-padding-default
 			.cancel
 				margin-right: vars.$size-1
