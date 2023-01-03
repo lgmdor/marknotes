@@ -1,11 +1,12 @@
 <script>
 	import SvelteMarkdown from 'svelte-markdown';
+	import MdPreview from './MdPreview.svelte';
 
 	export let text;
 </script>
 
 <div class="note">
-	<SvelteMarkdown source={text} />
+	<MdPreview><SvelteMarkdown source={text} /></MdPreview>
 </div>
 
 <style lang="sass">
