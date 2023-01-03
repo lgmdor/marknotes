@@ -1,9 +1,13 @@
 <script>
+	import MarkdownIt from 'markdown-it';
+
+	const md = new MarkdownIt();
+
 	export let text;
 </script>
 
 <div class="note">
-	{text}
+	{@html md.render(text)}
 </div>
 
 <style lang="sass">
