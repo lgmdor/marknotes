@@ -5,17 +5,21 @@
 	import { notes } from './../stores.js';
 
 	let isPopupVisible = false;
+	let text = '';
 
-	const showPopup = () => (isPopupVisible = true);
+	const showPopup = (e) => {
+		text = e.detail.text;
+		isPopupVisible = true;
+	};
 	const hidePopup = () => (isPopupVisible = false);
 </script>
 
 <Button text="New Note" onclick={showPopup} variant={'filled'} />
 
-<NoteAddPopup {isPopupVisible} on:hidePopup={hidePopup} />
+<NoteAddPopup mdInput={text} {isPopupVisible} on:hidePopup={hidePopup} />
 <section>
 	{#each $notes.reverse() as note (note)}
-		<Note text={note} />
+		<Note text={note} on:showPopup={showPopup} />
 	{/each}
 </section>
 

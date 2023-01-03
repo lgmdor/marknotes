@@ -19,7 +19,7 @@
 		clearEditor();
 	};
 
-	let mdInput = '';
+	export let mdInput = '';
 
 	let elInput;
 

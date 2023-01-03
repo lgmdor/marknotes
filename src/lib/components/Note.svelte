@@ -1,11 +1,19 @@
 <script>
 	import SvelteMarkdown from 'svelte-markdown';
 	import MdPreview from './MdPreview.svelte';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
 
 	export let text;
+
+	const openPopup = (e) => {
+		dispatch('showPopup', { text: text });
+	};
 </script>
 
-<div class="note">
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="note" on:click={openPopup}>
 	<MdPreview><SvelteMarkdown source={text} /></MdPreview>
 </div>
 
