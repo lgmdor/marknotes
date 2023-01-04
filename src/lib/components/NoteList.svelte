@@ -1,16 +1,33 @@
 <script>
 	import Note from '$lib/components/Note.svelte';
-	import { notes, isEditorVisible } from './../../stores.js';
+	import { isEditorVisible, db, notesLocal } from './../../stores.js';
+	import { onMount } from 'svelte';
 
 	const showPopup = () => {
 		isEditorVisible.update((isEditorVisible) => true);
 	};
+
+	let notes;
+
+	const loadNotes = () => {
+		const trans = $db.transaction('notes').objectStore('notes').getAll();
+
+		trans.onsuccess = (e) => {
+			notes = [...trans.result, ...$notesLocal];
+		};
+	};
+
+	onMount(() => {
+		loadNotes();
+	});
 </script>
 
 <section>
-	{#each $notes.reverse() as note (note)}
-		<Note text={note} on:showPopup={showPopup} />
-	{/each}
+	{#if notes}
+		{#each [...notes, ...$notesLocal].reverse() as note}
+			<Note text={note} on:showPopup={showPopup} />
+		{/each}
+	{/if}
 </section>
 
 <style lang="sass">
@@ -20,7 +37,7 @@ section
   padding: 0 vars.$size-2
   display: grid
   grid-gap: vars.$size-1
-  grid-template-columns: repeat(auto-fill, vars.$size-12)
+  grid-template-columns: repeat(auto-fill, vars.$size-16)
   width: 100%
   margin-top: vars.$size-4
 </style>

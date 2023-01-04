@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import Button from './Button.svelte';
 	import MdPreview from './MdPreview.svelte';
-	import { notes, isEditorVisible } from '../../stores.js';
+	import { isEditorVisible, db, notesLocal } from '../../stores.js';
 	import SvelteMarkdown from 'svelte-markdown';
 
 	const svelteMarkdownOptions = {
@@ -20,7 +20,10 @@
 	let elInput;
 
 	const saveNote = () => {
-		notes.update((notes) => [...notes, mdInput]);
+		notesLocal.update(($notesLocal) => [...$notesLocal, mdInput]);
+
+		$db.transaction('notes', 'readwrite').objectStore('notes').add(mdInput, Math.random());
+
 		hidePopup();
 	};
 
@@ -28,13 +31,13 @@
 
 	onMount(() => {
 		//console heult hier
-		elInput.addEventListener('keydown', (e) => {
+		/**elInput.addEventListener('keydown', (e) => {
 			if (e.key === 'Tab') {
 				e.preventDefault();
 
 				elInput.setRangeText('    ', elInput.selectionStart, elInput.selectionStart, 'end');
 			}
-		});
+		});*/
 	});
 </script>
 
