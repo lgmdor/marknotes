@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import Button from './Button.svelte';
 	import MdPreview from './MdPreview.svelte';
-	import { isEditorVisible, db, notesLocal } from '../../stores.js';
+	import { isEditorVisible, db, notesLocal, editorInput } from '../../stores.js';
 	import SvelteMarkdown from 'svelte-markdown';
 
 	const svelteMarkdownOptions = {
@@ -15,19 +15,17 @@
 		clearEditor();
 	};
 
-	export let mdInput = '';
-
 	let elInput;
 
 	const saveNote = () => {
-		notesLocal.update(($notesLocal) => [...$notesLocal, mdInput]);
+		notesLocal.update(($notesLocal) => [...$notesLocal, $editorInput]);
 
-		$db.transaction('notes', 'readwrite').objectStore('notes').add(mdInput, Math.random());
+		$db.transaction('notes', 'readwrite').objectStore('notes').add($editorInput, Math.random());
 
 		closeEditor();
 	};
 
-	const clearEditor = () => (mdInput = '');
+	const clearEditor = () => editorInput.update((editorInput) => '');
 
 	onMount(() => {
 		//console heult hier
@@ -49,12 +47,12 @@
 				<textarea
 					class="md-editor"
 					placeholder="Write something..."
-					bind:value={mdInput}
+					bind:value={$editorInput}
 					bind:this={elInput}
 				/>
 				<div class="wrap">
 					<MdPreview>
-						<SvelteMarkdown source={mdInput} options={svelteMarkdownOptions} />
+						<SvelteMarkdown source={$editorInput} options={svelteMarkdownOptions} />
 					</MdPreview>
 				</div>
 			</div>
