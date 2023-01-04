@@ -27,6 +27,7 @@
     padding: vars.$misc-padding-default
     cursor: pointer
     transition: boxs-shadow 60ms linear
+    max-height: vars.$size-24
     &:hover
       box-shadow: vars.$misc-boxShadow
 </style>

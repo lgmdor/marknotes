@@ -1,5 +1,4 @@
 <script>
-	import Button from '$lib/components/Button.svelte';
 	import NoteEditor from '$lib/components/NoteEditor.svelte';
 	import NoteList from '$lib/components/NoteList.svelte';
 	import Menu from '$lib/components/Menu.svelte';
@@ -7,9 +6,6 @@
 
 	export let data;
 
-	const openEditor = (e) => {
-		isEditorVisible.update((isEditorVisible) => true);
-	};
 	const closeEditor = () => {
 		isEditorVisible.update((isEditorVisible) => false);
 	};
@@ -17,12 +13,17 @@
 	db.update((db) => data.db);
 </script>
 
-<Button text="New Note" onclick={openEditor} variant={'filled'} />
-
-<NoteEditor on:closeEditor={closeEditor} />
-
-<NoteList />
+<main>
+	<NoteEditor on:closeEditor={closeEditor} />
+	<Menu />
+	<NoteList />
+</main>
 
 <style lang="sass">
 	@use '../vars'
+
+	main
+		display: flex
+		min-height: 100vh
+		width: 100%
 </style>

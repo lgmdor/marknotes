@@ -31,13 +31,12 @@
 </section>
 
 <style lang="sass">
-  @use '../../vars'
+	@use '../../vars'
 
 section
-  padding: 0 vars.$size-2
-  display: grid
-  grid-gap: vars.$size-1
-  grid-template-columns: repeat(auto-fill, vars.$size-16)
-  width: 100%
-  margin-top: vars.$size-4
+	padding: vars.$size-4
+	display: grid
+	grid-gap: vars.$size-1
+	grid-template-columns: repeat(auto-fill, vars.$size-16)
+	width: 100%
 </style>
