@@ -29,7 +29,6 @@
 	const clearEditor = () => editorInput.update((editorInput) => '');
 
 	onMount(() => {
-		//console heult hier
 		/**elInput.addEventListener('keydown', (e) => {
 			if (e.key === 'Tab') {
 				e.preventDefault();
@@ -94,7 +93,7 @@ $color-bg: vars.$color-dark-7
 			flex: 1
 			.md-editor, .wrap
 				flex: 1
-				padding: vars.$misc-padding-default
+				padding: 16px
 			.md-editor
 				resize: none
 				background: $color-bg
@@ -113,7 +112,7 @@ $color-bg: vars.$color-dark-7
 			justify-content: flex-end
 			align-items: center
 			border-top: vars.$misc-border-dark
-			padding: 0 vars.$misc-padding-default
+			padding: 0 16px
 			.cancel
 				margin-right: vars.$size-1
 </style>

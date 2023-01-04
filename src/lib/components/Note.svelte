@@ -19,22 +19,31 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="note" on:click={openEditor}>
-	<MdPreview><SvelteMarkdown source={text} options={svelteMarkdownOptions} /></MdPreview>
+	<div class="top">
+		<div class="title">Title</div>
+	</div>
+	<div class="bottom">
+		<MdPreview><SvelteMarkdown source={text} options={svelteMarkdownOptions} /></MdPreview>
+	</div>
 </div>
 
 <style lang="sass">
   @use './../../vars'
 
   .note
-    min-height: vars.$size-8
     border: vars.$misc-border-dark
     border-radius: vars.$misc-borderRadius
     color: vars.$color-text-2
-    padding: vars.$misc-padding-default
     cursor: pointer
     transition: boxs-shadow 60ms linear
-    max-height: vars.$size-24
     background: transparentize(vars.$color-dark-6, 0.8)
     &:hover
       box-shadow: vars.$misc-boxShadow
+    .top
+      width: 100%
+      border-bottom: vars.$misc-border-dark
+      .title
+        font-weight: bold
+    .top, .bottom
+      padding: vars.$misc-padding-default
 </style>
