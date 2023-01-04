@@ -1,36 +1,35 @@
 <script>
-	import Note from '$lib/components/Note.svelte';
 	import Button from '$lib/components/Button.svelte';
-	import NoteAddPopup from '$lib/components/NoteAddPopup.svelte';
-	import { notes } from './../stores.js';
+	import NoteAddPopup from '$lib/components/NoteEditor.svelte';
+	import NoteList from '$lib/components/NoteList.svelte';
+	import { isEditorVisible } from './../stores.js';
 
-	let isPopupVisible = false;
+	export let data;
+
 	let text = '';
 
 	const showPopup = (e) => {
-		text = e.detail.text;
-		isPopupVisible = true;
+		//text = e.detail.text;
+		isEditorVisible.update((isEditorVisible) => true);
 	};
-	const hidePopup = () => (isPopupVisible = false);
+	const hidePopup = () => {
+		isEditorVisible.update((isEditorVisible) => false);
+	};
 </script>
+
+<div class="test">{data.db}</div>
 
 <Button text="New Note" onclick={showPopup} variant={'filled'} />
 
-<NoteAddPopup mdInput={text} {isPopupVisible} on:hidePopup={hidePopup} />
-<section>
-	{#each $notes.reverse() as note (note)}
-		<Note text={note} on:showPopup={showPopup} />
-	{/each}
-</section>
+<NoteAddPopup mdInput={text} on:hidePopup={hidePopup} />
+
+<NoteList />
 
 <style lang="sass">
-  @use '../vars'
+	@use '../vars'
 
-section
-  padding: 0 vars.$size-2
-  display: grid
-  grid-gap: vars.$size-1
-  grid-template-columns: repeat(auto-fill, vars.$size-12)
-  width: 100%
-  margin-top: vars.$size-4
+
+
+.test
+	color: #fff
 </style>
