@@ -2,6 +2,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import NoteEditor from '$lib/components/NoteEditor.svelte';
 	import NoteList from '$lib/components/NoteList.svelte';
+	import Menu from '$lib/components/Menu.svelte';
 	import { isEditorVisible, db } from './../stores.js';
 
 	export let data;
