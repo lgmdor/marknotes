@@ -22,7 +22,6 @@
 
   .note
     min-height: vars.$size-8
-    width: vars.$size-12
     border: vars.$misc-border-default
     border-radius: vars.$misc-borderRadius
     color: vars.$color-text-2

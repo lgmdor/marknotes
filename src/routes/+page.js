@@ -1,7 +1,6 @@
 import { browser } from '$app/environment';
 
 let db;
-let notes;
 
 const openDB = () => {
 	return new Promise((resolve, reject) => {
@@ -17,13 +16,7 @@ const openDB = () => {
 		request.onsuccess = (e) => {
 			db = request.result;
 
-			//db.transaction('notes', 'readwrite').objectStore('notes').add('oki', Math.random());
-			const trans = db.transaction('notes').objectStore('notes').getAll();
-
-			trans.onsuccess = (e) => {
-				notes = trans.result;
-				resolve(notes);
-			};
+			resolve(db);
 		};
 	});
 };
@@ -31,13 +24,10 @@ const openDB = () => {
 //--------
 export async function load({ params }) {
 	if (browser) {
-		const x = await openDB();
-
-		console.log(x);
+		await openDB();
 
 		return {
-			db,
-			notes
+			db
 		};
 	}
 }
