@@ -7,7 +7,8 @@
 
 	const svelteMarkdownOptions = {
 		//https://marked.js.org/using_advanced#options
-		headerIds: false
+		headerIds: false,
+		breaks: true
 	};
 
 	const closeEditor = (e) => {
@@ -80,7 +81,7 @@ $color-bg: vars.$color-dark-7
 	justify-content: center
 	.popup
 		height: vars.$size-48
-		width: vars.$size-64
+		width: calc(vars.$size-64 + vars.$size-16)
 		background: $color-bg
 		color: vars.$color-text-2
 		border-radius: vars.$misc-borderRadius

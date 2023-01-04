@@ -36,7 +36,8 @@
 section
 	padding: vars.$size-4
 	display: grid
-	grid-gap: vars.$size-1
-	grid-template-columns: repeat(auto-fill, vars.$size-16)
+	grid-gap: vars.$size-2
+	grid-template-columns: repeat(auto-fill, vars.$size-20)
+	grid-auto-rows: minmax(min-content, max-content)
 	width: 100%
 </style>

@@ -10,6 +10,8 @@
 
   .md-preview
     line-height: calc(1em + 1ex)
+    :global(hr)
+      border: $border
     :global(p), :global(ul), :global(ol), :global(pre), :global(table)
       margin-bottom: 1rem
     :global(h1), :global(h2), :global(h3), :global(h4), :global(h5), :global(h6)
