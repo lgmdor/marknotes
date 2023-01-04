@@ -1,5 +1,5 @@
 <script>
-	import NoteEditor from '$lib/components/NoteEditor.svelte';
+	import NoteEditor from '$lib/components/Editor.svelte';
 	import NoteList from '$lib/components/NoteList.svelte';
 	import Menu from '$lib/components/Menu.svelte';
 	import { isEditorVisible, db } from './../stores.js';
