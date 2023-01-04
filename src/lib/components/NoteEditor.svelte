@@ -1,13 +1,9 @@
 <script>
-	import { createEventDispatcher, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import Button from './Button.svelte';
 	import MdPreview from './MdPreview.svelte';
-	import { notes } from './../../stores.js';
+	import { notes, isEditorVisible } from '../../stores.js';
 	import SvelteMarkdown from 'svelte-markdown';
-
-	export let isPopupVisible = false;
-
-	const dispatch = createEventDispatcher();
 
 	const svelteMarkdownOptions = {
 		//https://marked.js.org/using_advanced#options
@@ -15,7 +11,7 @@
 	};
 
 	const hidePopup = (e) => {
-		dispatch('hidePopup');
+		isEditorVisible.update((isEditorVisible) => false);
 		clearEditor();
 	};
 
@@ -42,7 +38,7 @@
 	});
 </script>
 
-{#if isPopupVisible}
+{#if $isEditorVisible}
 	<!--<div class="bg" on:click|self={hidePopup} aria-hidden="true">-->
 	<div class="bg" aria-hidden="true">
 		<div class="popup">
