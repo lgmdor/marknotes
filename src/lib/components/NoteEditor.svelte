@@ -20,7 +20,7 @@
 	const saveNote = () => {
 		notesLocal.update(($notesLocal) => [...$notesLocal, $editorInput]);
 
-		$db.transaction('notes', 'readwrite').objectStore('notes').add($editorInput, Math.random());
+		$db.transaction('notes', 'readwrite').objectStore('notes').add($editorInput, Date.now());
 
 		closeEditor();
 	};

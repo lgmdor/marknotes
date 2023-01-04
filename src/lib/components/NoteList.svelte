@@ -7,13 +7,13 @@
 		isEditorVisible.update((isEditorVisible) => true);
 	};
 
-	let notes;
+	let notesDB;
 
 	const loadNotes = () => {
 		const trans = $db.transaction('notes').objectStore('notes').getAll();
 
 		trans.onsuccess = (e) => {
-			notes = [...trans.result, ...$notesLocal];
+			notesDB = [...trans.result];
 		};
 	};
 
@@ -23,8 +23,8 @@
 </script>
 
 <section>
-	{#if notes}
-		{#each [...notes, ...$notesLocal].reverse() as note}
+	{#if notesDB || $notesLocal.length > 0}
+		{#each [...notesDB, ...$notesLocal].reverse() as note}
 			<Note text={note} on:openEditor={openEditor} />
 		{/each}
 	{/if}
