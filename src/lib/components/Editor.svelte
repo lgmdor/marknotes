@@ -72,12 +72,13 @@
 $color-bg: vars.$color-dark-7
 
 .bg
+	z-index: 9
 	position: fixed
 	inset: 0
-	background: transparentize(vars.$color-dark-8, 0.4)
 	display: flex
 	align-items: center
 	justify-content: center
+	backdrop-filter: blur(2px) brightness(80%)
 	.popup
 		height: vars.$size-48
 		width: calc(vars.$size-64 + vars.$size-16)

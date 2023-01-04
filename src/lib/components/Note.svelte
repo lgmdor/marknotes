@@ -6,7 +6,7 @@
 
 	export let text;
 
-	const openEditor = (e) => {
+	const openEditor = () => {
 		isEditorVisible.update((isEditorVisible) => true);
 		editorInput.update((editorInput) => text);
 	};
@@ -18,7 +18,7 @@
 	};
 
 	const dropdownItems = [
-		{ name: 'Edit', onclick: () => {} },
+		{ name: 'Edit', onclick: () => openEditor() },
 		{ name: 'Delete', danger: true, onclick: () => {} }
 	];
 </script>
