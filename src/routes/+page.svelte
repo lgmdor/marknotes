@@ -6,19 +6,19 @@
 
 	export let data;
 
-	const showPopup = (e) => {
+	const openEditor = (e) => {
 		isEditorVisible.update((isEditorVisible) => true);
 	};
-	const hidePopup = () => {
+	const closeEditor = () => {
 		isEditorVisible.update((isEditorVisible) => false);
 	};
 
 	db.update((db) => data.db);
 </script>
 
-<Button text="New Note" onclick={showPopup} variant={'filled'} />
+<Button text="New Note" onclick={openEditor} variant={'filled'} />
 
-<NoteEditor on:hidePopup={hidePopup} />
+<NoteEditor on:closeEditor={closeEditor} />
 
 <NoteList />
 

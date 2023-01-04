@@ -3,7 +3,7 @@
 	import { isEditorVisible, db, notesLocal } from './../../stores.js';
 	import { onMount } from 'svelte';
 
-	const showPopup = () => {
+	const openEditor = () => {
 		isEditorVisible.update((isEditorVisible) => true);
 	};
 
@@ -25,7 +25,7 @@
 <section>
 	{#if notes}
 		{#each [...notes, ...$notesLocal].reverse() as note}
-			<Note text={note} on:showPopup={showPopup} />
+			<Note text={note} on:openEditor={openEditor} />
 		{/each}
 	{/if}
 </section>

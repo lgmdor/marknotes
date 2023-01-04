@@ -10,7 +10,7 @@
 		headerIds: false
 	};
 
-	const hidePopup = (e) => {
+	const closeEditor = (e) => {
 		isEditorVisible.update((isEditorVisible) => false);
 		clearEditor();
 	};
@@ -24,7 +24,7 @@
 
 		$db.transaction('notes', 'readwrite').objectStore('notes').add(mdInput, Math.random());
 
-		hidePopup();
+		closeEditor();
 	};
 
 	const clearEditor = () => (mdInput = '');
@@ -42,7 +42,7 @@
 </script>
 
 {#if $isEditorVisible}
-	<!--<div class="bg" on:click|self={hidePopup} aria-hidden="true">-->
+	<!--<div class="bg" on:click|self={closeEditor} aria-hidden="true">-->
 	<div class="bg" aria-hidden="true">
 		<div class="popup">
 			<div class="main">
@@ -60,7 +60,7 @@
 			</div>
 			<div class="bottom">
 				<div class="cancel">
-					<Button text={'Cancel'} onclick={hidePopup} />
+					<Button text={'Cancel'} onclick={closeEditor} />
 				</div>
 				<Button variant={'filled'} text={'Save'} onclick={saveNote} />
 			</div>
