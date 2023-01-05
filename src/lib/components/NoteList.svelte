@@ -25,7 +25,7 @@
 <section>
 	{#if notesDB || $notesLocal.length > 0}
 		{#each [...notesDB, ...$notesLocal].reverse() as note}
-			<Note text={note} on:openEditor={openEditor} />
+			<Note {note} on:openEditor={openEditor} />
 		{/each}
 	{/if}
 </section>

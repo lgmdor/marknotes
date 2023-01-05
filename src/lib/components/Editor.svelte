@@ -4,6 +4,7 @@
 	import MdPreview from './MdPreview.svelte';
 	import { isEditorVisible, db, notesLocal, editorInput } from '../../stores.js';
 	import SvelteMarkdown from 'svelte-markdown';
+	import { Note } from './../../classes.js';
 
 	const svelteMarkdownOptions = {
 		//https://marked.js.org/using_advanced#options
@@ -19,9 +20,11 @@
 	let elInput;
 
 	const saveNote = () => {
-		notesLocal.update(($notesLocal) => [...$notesLocal, $editorInput]);
+		const note = new Note($editorInput, Date.now());
 
-		$db.transaction('notes', 'readwrite').objectStore('notes').add($editorInput, Date.now());
+		notesLocal.update(($notesLocal) => [...$notesLocal, note]);
+
+		$db.transaction('notes', 'readwrite').objectStore('notes').add(note, note.key);
 
 		closeEditor();
 	};
