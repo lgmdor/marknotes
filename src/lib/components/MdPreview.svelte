@@ -10,6 +10,10 @@
 
   .md-preview
     line-height: calc(1em + 1ex)
+    :global(blockquote)
+      padding: 0 1em
+      color: #909296
+      border-left: 0.25em solid #2C2E33
     :global(hr)
       border: $border
     :global(p), :global(ul), :global(ol), :global(pre), :global(table)

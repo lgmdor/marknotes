@@ -42,11 +42,11 @@
 	@use './../../vars'
 
 	.note
-		border: vars.$misc-border-dark
+		border: vars.$misc-border-default
 		border-radius: vars.$misc-borderRadius
 		color: vars.$color-text-2
 		transition: boxs-shadow 60ms linear
-		background: transparentize(vars.$color-dark-6, 0.8)
+		background: mix(vars.$color-dark-6, vars.$color-dark-7, 50%)
 		padding: vars.$misc-padding-small vars.$misc-padding-default
 		position: relative
 		&:hover

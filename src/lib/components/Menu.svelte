@@ -8,8 +8,11 @@
 </script>
 
 <aside>
+	<div class="logo">
+		<h1>Marknotes</h1>
+	</div>
 	<div class="new">
-		<Button text="New Note" onclick={openEditor} variant={'filled'} />
+		<Button text="New Note" onclick={openEditor} variant={'filled'} fullWidth={true} />
 	</div>
 </aside>
 
@@ -18,12 +21,21 @@
 
 aside
   width: vars.$size-16
-  border-right: vars.$misc-border-dark
   //flex: flex-grow
-  .new
+  background: vars.$color-dark-8
+  padding: 0 vars.$misc-padding-default
+  .new, .logo
     height: vars.$size-4
-    border-bottom: vars.$misc-border-dark
     display: flex
-    justify-content: center
     align-items: center
+  .new
+    justify-content: center
+  .logo
+    justify-content: flex-start
+    border-bottom: 1px solid vars.$color-dark-5
+    h1
+      color: vars.$color-text-2
+      font-family: "Roboto Slab"
+      font-weight: 400
+      user-select: none
 </style>

@@ -2,10 +2,12 @@
 	export let text = 'Click';
 	export let onclick = () => {};
 	export let variant = 'default';
+	export let fullWidth = false;
 </script>
 
 <button
 	on:click={onclick}
+	class:full-width={fullWidth}
 	class:variant-default={variant === 'default'}
 	class:variant-filled={variant === 'filled'}>{text}</button
 >
@@ -27,6 +29,8 @@ button
   min-width: vars.$size-6
   &:active
     transform: translateY(1px)
+  &.full-width
+    width: 100%
   &.variant-default
     background: vars.$color-dark-6
     color: vars.$color-text-1
