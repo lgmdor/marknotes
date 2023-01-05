@@ -59,10 +59,10 @@
     font-weight: bold
     transition: background 60ms linear
     &:hover
-      background: transparentize(vars.$color-dark-6, 0.6)
+      background: vars.$color-dark-6
   nav
     cursor: pointer
-    background: transparentize(vars.$color-dark-6, 0)
+    background: vars.$color-dark-6
     min-width: vars.$size-8
     min-height: vars.$size-2
     position: absolute
@@ -71,6 +71,7 @@
     border-radius: vars.$misc-borderRadius
     border: vars.$misc-border-default
     padding: 4px
+    box-shadow: vars.$misc-boxShadow
     ul
       list-style: none
       li
@@ -85,7 +86,7 @@
         &.danger
           color: vars.$color-red
           &:hover
-            background: transparentize(vars.$color-red, 0.8)
+            background: transparentize(vars.$color-red, 0.9)
         &:hover
           background: vars.$color-dark-5
         span

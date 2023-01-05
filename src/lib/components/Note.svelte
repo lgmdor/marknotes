@@ -49,8 +49,6 @@
 		background: mix(vars.$color-dark-6, vars.$color-dark-7, 50%)
 		padding: vars.$misc-padding-small vars.$misc-padding-default
 		position: relative
-		&:hover
-			box-shadow: vars.$misc-boxShadow
 		.wrap
 			position: absolute
 			top: vars.$misc-padding-small
