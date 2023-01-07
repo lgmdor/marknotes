@@ -57,4 +57,6 @@
   
   :global(.md-preview>:first-child)
     margin-top: 0!important
+  :global(.md-preview>:last-child)
+    margin-bottom: 0!important
 </style>

@@ -22,12 +22,17 @@
 
 	const saveNote = async () => {
 		const note = new Note($editorInput);
+		let id;
 
 		//https://dexie.org/docs/Table/Table.put()
 		if ($editorNoteKey) {
-			await db['notes'].put({ ...note, id: $editorNoteKey });
+			id = await db['notes'].put({ ...note, id: $editorNoteKey });
 		} else {
-			await db['notes'].add(note);
+			id = await db['notes'].add(note);
+		}
+
+		if (note.text.length == 0) {
+			await db['notes'].delete(id);
 		}
 
 		editorNoteKey.update((editorNoteKey) => null);
