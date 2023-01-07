@@ -24,7 +24,11 @@
 		const note = new Note($editorInput);
 
 		//https://dexie.org/docs/Table/Table.put()
-		await db['notes'].put({ ...note, id: $editorNoteKey });
+		if ($editorNoteKey) {
+			await db['notes'].put({ ...note, id: $editorNoteKey });
+		} else {
+			await db['notes'].add(note);
+		}
 
 		editorNoteKey.update((editorNoteKey) => null);
 		closeEditor();
