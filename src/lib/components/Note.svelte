@@ -48,6 +48,7 @@
 		background: mix(vars.$color-dark-6, vars.$color-dark-7, 50%)
 		padding: vars.$misc-padding-small vars.$misc-padding-default
 		position: relative
+		min-height: calc(vars.$misc-padding-small * 2 + vars.$size-1 * 1.5 + 2px)
 		.wrap
 			position: absolute
 			top: vars.$misc-padding-small

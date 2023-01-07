@@ -9,7 +9,9 @@
 	on:click={onclick}
 	class:full-width={fullWidth}
 	class:variant-default={variant === 'default'}
-	class:variant-filled={variant === 'filled'}>{text}</button
+	class:variant-filled={variant === 'filled'}
+	><div class="icon"><slot /></div>
+	<span>{text}</span></button
 >
 
 <style lang="sass">
@@ -27,6 +29,9 @@ button
   cursor: pointer
   transition: all 60ms linear
   min-width: vars.$size-6
+  display: flex
+  align-items: center
+  justify-content: center
   &:active
     transform: translateY(1px)
   &.full-width
@@ -42,4 +47,9 @@ button
     color: vars.$color-text-1
     &:hover
       background: darken(vars.$color-main, 6%)
+  .icon :global(svg)
+    height: 20px
+    width: 20px
+    stroke: #fff
+    margin-right: 8px
 </style>

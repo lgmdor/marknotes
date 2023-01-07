@@ -24,6 +24,8 @@
       line-height: 1.25
       margin-bottom: 1rem
       margin-top: 1.5rem
+    :global(h1):empty, :global(h2):empty, :global(h3):empty, :global(h4):empty, :global(h5):empty, :global(h6):empty
+      border-bottom: none
     :global(code)
       background: #2C2E33
     :global(pre)
