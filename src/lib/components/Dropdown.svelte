@@ -89,6 +89,5 @@
             background: transparentize(vars.$color-red, 0.9)
         &:hover
           background: vars.$color-dark-5
-        span
 
 </style>
