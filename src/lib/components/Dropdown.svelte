@@ -19,7 +19,6 @@
 
 		return {
 			destroy() {
-				console.log('destroy');
 				document.removeEventListener('click', handleClick, true);
 			}
 		};
@@ -72,6 +71,7 @@
     border: vars.$misc-border-default
     padding: 4px
     box-shadow: vars.$misc-boxShadow
+    z-index: 1
     ul
       list-style: none
       li

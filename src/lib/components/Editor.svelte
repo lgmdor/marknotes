@@ -2,9 +2,10 @@
 	import { onMount } from 'svelte';
 	import Button from './Button.svelte';
 	import MdPreview from './MdPreview.svelte';
-	import { isEditorVisible, db, notesLocal, editorInput } from '../../stores.js';
+	import { isEditorVisible, editorInput, editorNoteKey } from '../../stores.js';
 	import SvelteMarkdown from 'svelte-markdown';
 	import { Note } from './../../classes.js';
+	import { db } from '$src/db.js';
 
 	const svelteMarkdownOptions = {
 		//https://marked.js.org/using_advanced#options
@@ -19,13 +20,13 @@
 
 	let elInput;
 
-	const saveNote = () => {
-		const note = new Note($editorInput, Date.now());
+	const saveNote = async () => {
+		const note = new Note($editorInput);
 
-		notesLocal.update(($notesLocal) => [...$notesLocal, note]);
+		//https://dexie.org/docs/Table/Table.put()
+		await db['notes'].put({ ...note, id: $editorNoteKey });
 
-		$db.transaction('notes', 'readwrite').objectStore('notes').add(note, note.key);
-
+		editorNoteKey.update((editorNoteKey) => null);
 		closeEditor();
 	};
 

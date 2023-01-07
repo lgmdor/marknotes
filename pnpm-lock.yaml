@@ -5,6 +5,7 @@ specifiers:
   '@sveltejs/kit': ^1.0.0
   '@typescript-eslint/eslint-plugin': ^5.45.0
   '@typescript-eslint/parser': ^5.45.0
+  dexie: ^3.2.2
   eslint: ^8.28.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-svelte3: ^4.0.0
@@ -19,6 +20,7 @@ specifiers:
   vite: ^4.0.0
 
 dependencies:
+  dexie: 3.2.2
   svelte-markdown: 0.2.3_svelte@3.55.0
 
 devDependencies:
@@ -703,6 +705,11 @@ packages:
   /devalue/4.2.0:
     resolution: {integrity: sha512-mbjoAaCL2qogBKgeFxFPOXAUsZchircF+B/79LD4sHH0+NHfYm8gZpQrskKDn5gENGt35+5OI1GUF7hLVnkPDw==}
     dev: true
+
+  /dexie/3.2.2:
+    resolution: {integrity: sha512-q5dC3HPmir2DERlX+toCBbHQXW5MsyrFqPFcovkH9N2S/UW/H3H5AWAB6iEOExeraAu+j+zRDG+zg/D7YhH0qg==}
+    engines: {node: '>=6.0'}
+    dev: false
 
   /dir-glob/3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}

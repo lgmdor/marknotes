@@ -2,13 +2,15 @@
 	import SvelteMarkdown from 'svelte-markdown';
 	import MdPreview from './MdPreview.svelte';
 	import Dropdown from './Dropdown.svelte';
-	import { isEditorVisible, editorInput, db, notesLocal } from './../../stores.js';
+	import { isEditorVisible, editorInput, editorNoteKey } from './../../stores.js';
+	import { db } from '$src/db.js';
 
 	export let note;
 
 	const openEditor = () => {
 		isEditorVisible.update((isEditorVisible) => true);
 		editorInput.update((editorInput) => note.text);
+		editorNoteKey.update((editorNoteKey) => note.id);
 	};
 
 	const svelteMarkdownOptions = {
@@ -19,14 +21,11 @@
 
 	const dropdownItems = [
 		{ name: 'Edit', onclick: () => openEditor() },
-		{ name: 'Delete', danger: true, onclick: () => deleteNote(note.key) }
+		{ name: 'Delete', danger: true, onclick: () => deleteNote(note.id) }
 	];
 
-	const deleteNote = (key) => {
-		notesLocal.update(($notesLocal) => $notesLocal.filter((note) => note.key != key));
-		console.log($notesLocal);
-
-		const request = $db.transaction('notes', 'readwrite').objectStore('notes').delete(key);
+	const deleteNote = (id) => {
+		db['notes'].delete(id);
 	};
 </script>
 

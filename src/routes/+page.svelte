@@ -2,15 +2,13 @@
 	import NoteEditor from '$lib/components/Editor.svelte';
 	import NoteList from '$lib/components/NoteList.svelte';
 	import Menu from '$lib/components/Menu.svelte';
-	import { isEditorVisible, db } from './../stores.js';
+	import { isEditorVisible } from './../stores.js';
 
-	export let data;
+	//export let data;
 
 	const closeEditor = () => {
 		isEditorVisible.update((isEditorVisible) => false);
 	};
-
-	db.update((db) => data.db);
 </script>
 
 <main>

@@ -1,30 +1,19 @@
 <script>
 	import Note from '$lib/components/Note.svelte';
-	import { isEditorVisible, db, notesLocal } from './../../stores.js';
-	import { onMount } from 'svelte';
+	import { isEditorVisible } from './../../stores.js';
+	import { liveQuery } from 'dexie';
+	import { db } from '$src/db.js';
 
 	const openEditor = () => {
 		isEditorVisible.update((isEditorVisible) => true);
 	};
 
-	let notesDB;
-
-	const loadNotes = () => {
-		const trans = $db.transaction('notes').objectStore('notes').getAll();
-
-		trans.onsuccess = (e) => {
-			notesDB = [...trans.result];
-		};
-	};
-
-	onMount(() => {
-		loadNotes();
-	});
+	let notes = liveQuery(() => db['notes'].toArray());
 </script>
 
 <section>
-	{#if notesDB || $notesLocal.length > 0}
-		{#each [...notesDB, ...$notesLocal].reverse() as note}
+	{#if true}
+		{#each $notes?.reverse() || [] as note (note.id)}
 			<Note {note} on:openEditor={openEditor} />
 		{/each}
 	{/if}
