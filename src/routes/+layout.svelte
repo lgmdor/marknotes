@@ -10,6 +10,9 @@
 
 :global(body)
   background: vars.$color-dark-7
-  height: 100vh
-  width: 100%
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  flex-direction: column
+  font-family: "Roboto"
 </style>

@@ -1,0 +1,56 @@
+<script>
+	import SvelteMarkdown from 'svelte-markdown';
+	import MdPreview from './MdPreview.svelte';
+	import Dropdown from './Dropdown.svelte';
+	import { isEditorVisible, editorInput, db, notesLocal } from './../../stores.js';
+
+	export let note;
+
+	const openEditor = () => {
+		isEditorVisible.update((isEditorVisible) => true);
+		editorInput.update((editorInput) => note.text);
+	};
+
+	const svelteMarkdownOptions = {
+		//https://marked.js.org/using_advanced#options
+		headerIds: false,
+		breaks: true
+	};
+
+	const dropdownItems = [
+		{ name: 'Edit', onclick: () => openEditor() },
+		{ name: 'Delete', danger: true, onclick: () => deleteNote(note.key) }
+	];
+
+	const deleteNote = (key) => {
+		notesLocal.update(($notesLocal) => $notesLocal.filter((note) => note.key != key));
+		console.log($notesLocal);
+
+		const request = $db.transaction('notes', 'readwrite').objectStore('notes').delete(key);
+	};
+</script>
+
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="note">
+	<div class="wrap">
+		<Dropdown menuItems={dropdownItems} />
+	</div>
+	<MdPreview><SvelteMarkdown source={note.text} options={svelteMarkdownOptions} /></MdPreview>
+</div>
+
+<style lang="sass">
+	@use './../../vars'
+
+	.note
+		border: vars.$misc-border-default
+		border-radius: vars.$misc-borderRadius
+		color: vars.$color-text-2
+		transition: boxs-shadow 60ms linear
+		background: mix(vars.$color-dark-6, vars.$color-dark-7, 50%)
+		padding: vars.$misc-padding-small vars.$misc-padding-default
+		position: relative
+		.wrap
+			position: absolute
+			top: vars.$misc-padding-small
+			right: vars.$misc-padding-default
+</style>
