@@ -3,19 +3,28 @@
 	import { isEditorVisible } from './../../stores.js';
 	import { liveQuery } from 'dexie';
 	import { db } from '$src/db.js';
+	import Masonry from 'svelte-bricks';
 
 	const openEditor = () => {
 		isEditorVisible.update((isEditorVisible) => true);
 	};
 
 	let notes = liveQuery(() => db['notes'].toArray());
+
+	// https://www.npmjs.com/package/svelte-bricks#Props
+	const settings = {
+		minColWidth: 216,
+		maxColWidth: 320,
+		gap: 32,
+		animate: false
+	};
 </script>
 
 <section>
-	{#if true}
-		{#each $notes?.reverse() || [] as note (note.id)}
-			<Note {note} on:openEditor={openEditor} />
-		{/each}
+	{#if $notes?.length > 0}
+		<Masonry items={$notes} {...settings} let:item>
+			<Note note={item} />
+		</Masonry>
 	{/if}
 </section>
 
@@ -24,9 +33,5 @@
 
 section
 	padding: vars.$size-4
-	display: grid
-	grid-gap: vars.$size-2
-	grid-template-columns: repeat(auto-fill, vars.$size-20)
-	grid-auto-rows: minmax(min-content, max-content)
 	width: 100%
 </style>
