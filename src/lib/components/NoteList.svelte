@@ -34,4 +34,6 @@
 section
 	padding: vars.$size-4
 	width: 100%
+	:global(div.masonry)
+		justify-content: flex-start
 </style>
