@@ -1,10 +1,6 @@
 <script>
 	let isNavVisible = false;
 
-	export let menuItems = [{ name: 'Empty' }];
-
-	let dropdownNav;
-
 	const showNav = () => (isNavVisible = true);
 	const hideNav = () => (isNavVisible = false);
 
@@ -30,11 +26,7 @@
 	{#if isNavVisible}
 		<nav use:clickOutside on:outsideclick={hideNav}>
 			<ul>
-				{#each menuItems as menuItem}
-					<li on:click={menuItem.onclick} aria-hidden="true" class:danger={menuItem.danger}>
-						<span>{menuItem.name}</span>
-					</li>
-				{/each}
+				<slot />
 			</ul>
 		</nav>
 	{/if}
@@ -72,22 +64,4 @@
     padding: 4px
     box-shadow: vars.$misc-boxShadow
     z-index: 1
-    ul
-      list-style: none
-      li
-        display: flex
-        align-items: center
-        justify-content: flex-start
-        height: vars.$size-2
-        font-size: 14px
-        border-radius: vars.$misc-borderRadius
-        padding: 10px 12px
-        transition: background 60ms linear
-        &.danger
-          color: vars.$color-red
-          &:hover
-            background: transparentize(vars.$color-red, 0.9)
-        &:hover
-          background: vars.$color-dark-5
-
 </style>

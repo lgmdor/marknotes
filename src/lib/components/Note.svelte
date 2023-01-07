@@ -2,6 +2,7 @@
 	import SvelteMarkdown from 'svelte-markdown';
 	import MdPreview from './MdPreview.svelte';
 	import Dropdown from './Dropdown.svelte';
+	import DropdownItem from './DropdownItem.svelte';
 	import { isEditorVisible, editorInput, editorNoteKey } from './../../stores.js';
 	import { db } from '$src/db.js';
 
@@ -19,20 +20,18 @@
 		breaks: true
 	};
 
-	const dropdownItems = [
-		{ name: 'Edit', onclick: () => openEditor() },
-		{ name: 'Delete', danger: true, onclick: () => deleteNote(note.id) }
-	];
-
-	const deleteNote = (id) => {
-		db['notes'].delete(id);
+	const deleteNote = () => {
+		db['notes'].delete(note.id);
 	};
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="note">
 	<div class="wrap">
-		<Dropdown menuItems={dropdownItems} />
+		<Dropdown>
+			<DropdownItem text={'Edit'} onclick={openEditor} />
+			<DropdownItem text={'Delete'} onclick={deleteNote} danger={true} />
+		</Dropdown>
 	</div>
 	<MdPreview><SvelteMarkdown source={note.text} options={svelteMarkdownOptions} /></MdPreview>
 </div>
