@@ -2,6 +2,7 @@
 	export let text;
 	export let isClickable = false;
 	export let isActive = () => true;
+	export let count = null;
 </script>
 
 <div
@@ -11,9 +12,13 @@
 	on:click
 	aria-hidden="true"
 >
-	<span>
-		{text}
-	</span>
+	{#if count}
+		<span>{`${text} (${count()})`}</span>
+	{:else}
+		<span>
+			{text}
+		</span>
+	{/if}
 </div>
 
 <style lang="sass">

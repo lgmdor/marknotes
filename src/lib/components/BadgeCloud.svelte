@@ -7,6 +7,7 @@
 	export let toggleBadge;
 	export let isBadgeActive;
 	export let noBadgesText = 'Nothing found';
+	export let countBadges = (badges) => null;
 </script>
 
 <div class="badge-cloud">
@@ -18,6 +19,7 @@
 					text={badge[`${badgeTextName}`]}
 					isClickable={true}
 					isActive={() => isBadgeActive(badge)}
+					count={() => countBadges(badge)}
 					on:click={() => toggleBadge(badge)}
 				/>
 			{/each}

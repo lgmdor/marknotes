@@ -9,7 +9,13 @@
 		isPopupVisible.update((isPopupVisible) => true);
 	};
 
-	const tags = liveQuery(() => db['tags'].toArray());
+	let tags;
+
+	const notes = liveQuery(() => db['notes'].toArray());
+
+	const updateTags = () => (tags = liveQuery(() => db['tags'].toArray()));
+
+	$: $notes, updateTags();
 
 	const toggleTag = async (tag) => {
 		if (tag.isActive) {
@@ -20,6 +26,13 @@
 	};
 
 	const isTagActive = (tag) => $tags.filter((tagFilter) => tagFilter.isActive).includes(tag);
+
+	const countTags = (tag) => {
+		return $notes
+			.map((note) => note.tags)
+			.flat()
+			.filter((tagFilter) => tagFilter === tag.name).length;
+	};
 </script>
 
 <aside>
@@ -36,6 +49,7 @@
 		toggleBadge={toggleTag}
 		isBadgeActive={isTagActive}
 		noBadgesText={'No tags yet'}
+		countBadges={countTags}
 	/>
 </aside>
 
