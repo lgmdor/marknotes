@@ -3,5 +3,6 @@ import Dexie from 'dexie';
 export const db = new Dexie('dbMarknotes');
 
 db.version(1).stores({
-	notes: '++id, text'
+	notes: '++id, text',
+	tags: '++id, name'
 });

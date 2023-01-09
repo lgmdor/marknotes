@@ -1,9 +1,9 @@
 <script>
 	import Button from '$lib/components/Button.svelte';
-	import { isEditorVisible } from './../../stores.js';
+	import { isPopupVisible } from './../../stores.js';
 
-	const openEditor = (e) => {
-		isEditorVisible.update((isEditorVisible) => true);
+	const openPopup = (e) => {
+		isPopupVisible.update((isPopupVisible) => true);
 	};
 </script>
 
@@ -12,7 +12,7 @@
 		<h1>Marknotes</h1>
 	</div>
 	<div class="new">
-		<Button text="New Note" onclick={openEditor} variant={'filled'} fullWidth={true} />
+		<Button text="New Note" onclick={openPopup} variant={'filled'} fullWidth={true} />
 	</div>
 </aside>
 

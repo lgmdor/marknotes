@@ -39,7 +39,7 @@ button
   &.variant-default
     background: vars.$color-dark-6
     color: vars.$color-text-1
-    border: 1px solid vars.$color-dark-4
+    border: vars.$misc-border-default
     &:hover
       background: transparentize(vars.$color-dark-4, 0.55)
   &.variant-filled

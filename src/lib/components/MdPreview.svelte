@@ -16,7 +16,7 @@
       border-left: 0.25em solid #2C2E33
     :global(hr)
       border: $border
-    :global(p), :global(ul), :global(ol), :global(pre), :global(table)
+    :global(p), :global(ul), :global(ol), :global(pre), :global(table), :global(hr)
       margin-bottom: 1rem
     :global(h1), :global(h2), :global(h3), :global(h4), :global(h5), :global(h6)
       border-bottom: $border

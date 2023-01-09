@@ -1,13 +1,9 @@
 <script>
 	import Note from '$lib/components/Note.svelte';
-	import { isEditorVisible } from './../../stores.js';
+	import { isPopupVisible } from './../../stores.js';
 	import { liveQuery } from 'dexie';
 	import { db } from '$src/db.js';
 	import Masonry from 'svelte-bricks';
-
-	const openEditor = () => {
-		isEditorVisible.update((isEditorVisible) => true);
-	};
 
 	let notes = liveQuery(() => db['notes'].toArray());
 
