@@ -9,7 +9,7 @@
 		isPopupVisible.update((isPopupVisible) => true);
 	};
 
-	const badges = liveQuery(() => db['tags'].toArray());
+	const tags = liveQuery(() => db['tags'].toArray());
 
 	const toggleTag = async (tag) => {
 		if (tag.isActive) {
@@ -18,6 +18,8 @@
 			await db['tags'].update(tag.id, { isActive: 1 });
 		}
 	};
+
+	const isTagActive = (tag) => $tags.filter((tagFilter) => tagFilter.isActive).includes(tag);
 </script>
 
 <aside>
@@ -27,12 +29,13 @@
 	<div class="new">
 		<Button text="New Note" onclick={openPopup} variant={'filled'} fullWidth={true} />
 	</div>
-	{#if $badges?.length}
+	{#if $tags?.length}
 		<BadgeCloud
 			title={'Filter tags'}
-			badges={$badges}
+			badges={$tags}
 			badgeTextName={'name'}
 			toggleBadge={toggleTag}
+			isBadgeActive={isTagActive}
 		/>
 	{/if}
 </aside>

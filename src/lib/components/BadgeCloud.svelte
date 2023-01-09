@@ -5,6 +5,7 @@
 	export let badges;
 	export let badgeTextName;
 	export let toggleBadge;
+	export let isBadgeActive;
 </script>
 
 <div class="badge-cloud">
@@ -14,6 +15,7 @@
 			<Badge
 				text={badge[`${badgeTextName}`]}
 				isClickable={true}
+				isActive={() => isBadgeActive(badge)}
 				on:click={() => toggleBadge(badge)}
 			/>
 		{/each}

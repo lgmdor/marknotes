@@ -1,18 +1,13 @@
 <script>
 	export let text;
 	export let isClickable = false;
-	export let isActive = true;
-
-	const toggleIsActive = () => {
-		isActive = !isActive;
-	};
+	export let isActive = () => true;
 </script>
 
 <div
 	class="badge"
 	class:isClickable
-	class:isActive
-	on:click={toggleIsActive}
+	class:isActive={isActive() == true}
 	on:click
 	aria-hidden="true"
 >

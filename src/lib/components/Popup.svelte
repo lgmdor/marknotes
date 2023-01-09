@@ -73,6 +73,7 @@
 					itemKeyName={'id'}
 					itemTextName={'name'}
 					addItem={addTag}
+					currSelected={['tag1', 'tag3']}
 					on:selectionchange={updateTags}
 				/>
 				<div class="btns">

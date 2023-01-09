@@ -2,13 +2,14 @@
 	import Select from './Select.svelte';
 	import SelectItem from './SelectItem.svelte';
 	import MultiselectItem from './MultiselectItem.svelte';
-	import { setContext, createEventDispatcher } from 'svelte';
+	import { setContext, createEventDispatcher, onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
 	export let items;
 	export let itemKeyName;
 	export let itemTextName;
 	export let addItem;
+	export let currSelected = [];
 
 	const selectedItems = writable([]);
 
@@ -50,6 +51,12 @@
 	const dispatch = createEventDispatcher();
 
 	$: $selectedItems, dispatch('selectionchange', { selectedItems: $selectedItems });
+
+	onMount(() => {
+		if (currSelected.length) {
+			selectedItems.update((items) => [...currSelected]);
+		}
+	});
 </script>
 
 <div
