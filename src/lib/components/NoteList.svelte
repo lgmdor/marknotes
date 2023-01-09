@@ -1,11 +1,28 @@
 <script>
 	import Note from '$lib/components/Note.svelte';
-	import { isPopupVisible } from './../../stores.js';
 	import { liveQuery } from 'dexie';
 	import { db } from '$src/db.js';
 	import Masonry from 'svelte-bricks';
 
-	let notes = liveQuery(() => db['notes'].toArray());
+	let notes;
+
+	const tags = liveQuery(() => db['tags'].toArray());
+
+	const updateNotes = () => {
+		if ($tags) {
+			notes = liveQuery(() =>
+				db['notes']
+					.filter((note) =>
+						note.tags.some((tagNote) =>
+							$tags.filter((tagFilter) => tagFilter.isActive).some((tag) => tag.name === tagNote)
+						)
+					)
+					.toArray()
+			);
+		}
+	};
+
+	$: $tags, updateNotes();
 
 	// https://www.npmjs.com/package/svelte-bricks#Props
 	const settings = {
@@ -14,10 +31,13 @@
 		gap: 32,
 		animate: false
 	};
+
+	//$: $tags, updateNotesActive();
+	//$: $notes, updateNotesActive();
 </script>
 
 <section>
-	{#if $notes?.length > 0}
+	{#if $notes && $tags && $notes.length > 0}
 		<Masonry items={$notes} {...settings} let:item>
 			<Note note={item} />
 		</Masonry>

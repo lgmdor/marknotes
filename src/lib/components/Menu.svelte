@@ -1,9 +1,22 @@
 <script>
 	import Button from '$lib/components/Button.svelte';
-	import { isPopupVisible } from './../../stores.js';
+	import { isPopupVisible } from '$src/stores.js';
+	import BadgeCloud from './BadgeCloud.svelte';
+	import { liveQuery } from 'dexie';
+	import { db } from '$src/db.js';
 
 	const openPopup = (e) => {
 		isPopupVisible.update((isPopupVisible) => true);
+	};
+
+	const badges = liveQuery(() => db['tags'].toArray());
+
+	const toggleTag = async (tag) => {
+		if (tag.isActive) {
+			await db['tags'].update(tag.id, { isActive: 0 });
+		} else {
+			await db['tags'].update(tag.id, { isActive: 1 });
+		}
 	};
 </script>
 
@@ -14,6 +27,14 @@
 	<div class="new">
 		<Button text="New Note" onclick={openPopup} variant={'filled'} fullWidth={true} />
 	</div>
+	{#if $badges?.length}
+		<BadgeCloud
+			title={'Filter tags'}
+			badges={$badges}
+			badgeTextName={'name'}
+			toggleBadge={toggleTag}
+		/>
+	{/if}
 </aside>
 
 <style lang="sass">

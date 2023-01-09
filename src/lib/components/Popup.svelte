@@ -4,7 +4,7 @@
 	import Multiselect from './Multiselect.svelte';
 	import { isPopupVisible, editorNoteKey, editorInput } from '$src/stores.js';
 	import SvelteMarkdown from 'svelte-markdown';
-	import { Note } from '$src/classes.js';
+	import { Tag } from '$src/classes.js';
 	import { db } from '$src/db.js';
 	import { liveQuery } from 'dexie';
 	import Editor from './Editor.svelte';
@@ -22,7 +22,7 @@
 	};
 
 	const saveNote = async () => {
-		const note = new Note($editorInput, selectedTags);
+		const note = { text: $editorInput, tags: selectedTags.map((tag) => tag.name) };
 		let id;
 
 		//https://dexie.org/docs/Table/Table.put()
@@ -45,11 +45,11 @@
 	const tags = liveQuery(() => db['tags'].toArray());
 
 	const addTag = async (name) => {
-		await db['tags'].add({ name });
+		await db['tags'].add({ name, isActive: 1 });
 	};
 
 	const updateTags = (e) => {
-		selectedTags = e.detail.selectedItems;
+		selectedTags = e.detail.selectedItems.map((tagName) => new Tag(tagName, true));
 	};
 </script>
 
