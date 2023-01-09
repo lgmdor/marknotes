@@ -8,7 +8,7 @@
 
 	const tags = liveQuery(() => db['tags'].toArray());
 
-	const updateNotes = () => {
+	const loadNotes = () => {
 		if ($tags) {
 			notes = liveQuery(() =>
 				db['notes']
@@ -22,7 +22,7 @@
 		}
 	};
 
-	$: $tags, updateNotes();
+	$: $tags, loadNotes();
 
 	// https://www.npmjs.com/package/svelte-bricks#Props
 	const settings = {
@@ -31,9 +31,6 @@
 		gap: 32,
 		animate: false
 	};
-
-	//$: $tags, updateNotesActive();
-	//$: $notes, updateNotesActive();
 </script>
 
 <section>

@@ -13,9 +13,9 @@
 
 	const notes = liveQuery(() => db['notes'].toArray());
 
-	const updateTags = () => (tags = liveQuery(() => db['tags'].toArray()));
+	const loadTags = () => (tags = liveQuery(() => db['tags'].toArray()));
 
-	$: $notes, updateTags();
+	$: $notes, loadTags();
 
 	const toggleTag = async (tag) => {
 		if (tag.isActive) {

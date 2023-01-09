@@ -5,14 +5,8 @@
 	import DropdownItem from './DropdownItem.svelte';
 	import { isPopupVisible, editorInput, editorNoteKey, editorNoteTags } from './../../stores.js';
 	import { db } from '$src/db.js';
-	import Badge from './Badge.svelte';
 
 	export let note;
-
-	let isTagsVisible = false;
-
-	const showTags = () => (isTagsVisible = true);
-	const hideTags = () => (isTagsVisible = false);
 
 	const openPopup = () => {
 		isPopupVisible.update((isPopupVisible) => true);
@@ -33,7 +27,7 @@
 </script>
 
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
-<div class="note" on:mouseover={showTags} on:mouseout={hideTags}>
+<div class="note">
 	<div class="top">
 		<div class="wrap">
 			<Dropdown>
@@ -43,17 +37,6 @@
 		</div>
 		<MdPreview><SvelteMarkdown source={note.text} options={svelteMarkdownOptions} /></MdPreview>
 	</div>
-	{#if isTagsVisible}
-		<div class="tags">
-			{#if note.tags.length}
-				{#each note.tags as tag}
-					<Badge text={tag} />
-				{/each}
-			{:else}
-				<span class="no-tags">No tags</span>
-			{/if}
-		</div>
-	{/if}
 </div>
 
 <style lang="sass">
