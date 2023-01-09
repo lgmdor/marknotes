@@ -48,8 +48,9 @@ button
     &:hover
       background: darken(vars.$color-main, 6%)
   .icon :global(svg)
-    height: 20px
-    width: 20px
-    stroke: #fff
-    margin-right: 8px
+    height: 14px
+    width: 14px
+    margin-right: 6px
+    stroke-width: 2
+    stroke: currentcolor
 </style>

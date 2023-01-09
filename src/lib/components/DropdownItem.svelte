@@ -5,6 +5,7 @@
 </script>
 
 <li on:click={onclick} aria-hidden="true" class:danger>
+	<slot />
 	<span>{text}</span>
 </li>
 
@@ -26,5 +27,10 @@ li
       background: transparentize(vars.$color-red, 0.9)
   &:hover
     background: vars.$color-dark-5
-
+  :global(svg)
+    height: 16px
+    width: 16px
+    margin-right: 10px
+    stroke-width: 2
+    stroke: currentcolor
 </style>

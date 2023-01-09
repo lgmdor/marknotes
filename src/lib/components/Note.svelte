@@ -1,4 +1,8 @@
 <script>
+	// @ts-ignore
+	import IconTrash from '$lib/assets/icon_trash.svg?component';
+	// @ts-ignore
+	import IconEdit from '$lib/assets/icon_edit.svg?component';
 	import SvelteMarkdown from 'svelte-markdown';
 	import MdPreview from './MdPreview.svelte';
 	import Dropdown from './Dropdown.svelte';
@@ -31,8 +35,12 @@
 	<div class="top">
 		<div class="wrap">
 			<Dropdown>
-				<DropdownItem text={'Edit'} onclick={openPopup} />
-				<DropdownItem text={'Delete'} onclick={deleteNote} danger={true} />
+				<DropdownItem text={'Edit'} onclick={openPopup}>
+					<IconEdit />
+				</DropdownItem>
+				<DropdownItem text={'Delete'} onclick={deleteNote} danger={true}>
+					<IconTrash />
+				</DropdownItem>
 			</Dropdown>
 		</div>
 		<MdPreview><SvelteMarkdown source={note.text} options={svelteMarkdownOptions} /></MdPreview>

@@ -1,4 +1,7 @@
 <script>
+	// @ts-ignore
+	import IconDots from '$lib/assets/icon_dots.svg?component';
+
 	let isNavVisible = false;
 
 	const showNav = () => (isNavVisible = true);
@@ -22,7 +25,9 @@
 </script>
 
 <div class="dropdown">
-	<button class="toggle" on:click|self={showNav}>...</button>
+	<button class="toggle" on:click={showNav}>
+		<IconDots />
+	</button>
 	{#if isNavVisible}
 		<nav use:clickOutside on:outsideclick={hideNav}>
 			<ul>
@@ -51,6 +56,10 @@
     transition: background 60ms linear
     &:hover
       background: vars.$color-dark-6
+    :global(svg)
+      stroke: vars.$color-text-2
+      height: 18px
+      width: 18px
   nav
     cursor: pointer
     background: vars.$color-dark-6
