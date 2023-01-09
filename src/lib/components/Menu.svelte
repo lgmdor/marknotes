@@ -29,15 +29,14 @@
 	<div class="new">
 		<Button text="New Note" onclick={openPopup} variant={'filled'} fullWidth={true} />
 	</div>
-	{#if $tags?.length}
-		<BadgeCloud
-			title={'Filter tags'}
-			badges={$tags}
-			badgeTextName={'name'}
-			toggleBadge={toggleTag}
-			isBadgeActive={isTagActive}
-		/>
-	{/if}
+	<BadgeCloud
+		title={'Filter tags'}
+		badges={$tags}
+		badgeTextName={'name'}
+		toggleBadge={toggleTag}
+		isBadgeActive={isTagActive}
+		noBadgesText={'No tags yet'}
+	/>
 </aside>
 
 <style lang="sass">

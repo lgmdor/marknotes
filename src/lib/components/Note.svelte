@@ -3,7 +3,7 @@
 	import MdPreview from './MdPreview.svelte';
 	import Dropdown from './Dropdown.svelte';
 	import DropdownItem from './DropdownItem.svelte';
-	import { isPopupVisible, editorInput, editorNoteKey } from './../../stores.js';
+	import { isPopupVisible, editorInput, editorNoteKey, editorNoteTags } from './../../stores.js';
 	import { db } from '$src/db.js';
 	import Badge from './Badge.svelte';
 
@@ -16,8 +16,9 @@
 
 	const openPopup = () => {
 		isPopupVisible.update((isPopupVisible) => true);
-		editorInput.update((editorInput) => note.text);
-		editorNoteKey.update((editorNoteKey) => note.id);
+		editorInput.update((input) => note.text);
+		editorNoteKey.update((key) => note.id);
+		editorNoteTags.update((tags) => note.tags);
 	};
 
 	const svelteMarkdownOptions = {

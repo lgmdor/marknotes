@@ -2,7 +2,7 @@
 	import Button from './Button.svelte';
 	import MdPreview from './MdPreview.svelte';
 	import Multiselect from './Multiselect.svelte';
-	import { isPopupVisible, editorNoteKey, editorInput } from '$src/stores.js';
+	import { isPopupVisible, editorNoteKey, editorInput, editorNoteTags } from '$src/stores.js';
 	import SvelteMarkdown from 'svelte-markdown';
 	import { Tag } from '$src/classes.js';
 	import { db } from '$src/db.js';
@@ -14,6 +14,8 @@
 		headerIds: false,
 		breaks: true
 	};
+
+	const tags = liveQuery(() => db['tags'].toArray());
 
 	const closePopup = (e) => {
 		isPopupVisible.update((isPopupVisible) => false);
@@ -41,8 +43,6 @@
 	};
 
 	let selectedTags = [];
-
-	const tags = liveQuery(() => db['tags'].toArray());
 
 	const addTag = async (name) => {
 		await db['tags'].add({ name, isActive: 1 });
@@ -73,7 +73,7 @@
 					itemKeyName={'id'}
 					itemTextName={'name'}
 					addItem={addTag}
-					currSelected={['tag1', 'tag3']}
+					currSelected={$editorNoteTags}
 					on:selectionchange={updateTags}
 				/>
 				<div class="btns">
