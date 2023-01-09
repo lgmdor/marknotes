@@ -1,18 +1,16 @@
 <script>
-	import NoteEditor from '$lib/components/Editor.svelte';
+	import Popup from '$src/lib/components/Popup.svelte';
 	import NoteList from '$lib/components/NoteList.svelte';
 	import Menu from '$lib/components/Menu.svelte';
-	import { isEditorVisible } from './../stores.js';
+	import { isPopupVisible } from './../stores.js';
 
 	//export let data;
-
-	const closeEditor = () => {
-		isEditorVisible.update((isEditorVisible) => false);
-	};
 </script>
 
 <main>
-	<NoteEditor on:closeEditor={closeEditor} />
+	{#if $isPopupVisible}
+		<Popup />
+	{/if}
 	<Menu />
 	<NoteList />
 </main>
