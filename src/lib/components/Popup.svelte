@@ -105,6 +105,7 @@
 		.top
 			flex: 1
 			padding: 16px
+			overflow-y: auto
 		.bottom
 			height: vars.$size-4
 			display: flex
@@ -116,4 +117,10 @@
 				display: flex
 				.cancel
 					margin-right: vars.$size-1
+
+::-webkit-scrollbar
+	background: vars.$color-dark-6
+
+::-webkit-scrollbar-thumb
+	background: vars.$color-dark-8
 </style>

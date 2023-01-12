@@ -87,6 +87,9 @@ div
 			margin: 0
 		:global(.editor .paragraph)
 			margin: 0
+		:global(.editor p)
+			line-height: calc(1em + 1ex)
+			letter-spacing: 0
 	&.transparentBg 
 		:global(.milkdown)
 			background: transparent
