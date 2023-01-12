@@ -1,5 +1,5 @@
 <script>
-	import { Editor, rootCtx, defaultValueCtx } from '@milkdown/core';
+	import { Editor, rootCtx, defaultValueCtx, editorViewOptionsCtx } from '@milkdown/core';
 	import { gfm } from '@milkdown/preset-gfm';
 	import { nord } from '@milkdown/theme-nord';
 	import { history } from '@milkdown/plugin-history';
@@ -9,15 +9,22 @@
 	import { math } from '@milkdown/plugin-math';
 	import { listener, listenerCtx } from '@milkdown/plugin-listener';
 
-	export let editorInput;
+	export let input;
+	export let output = '';
 
 	function editor(dom) {
 		Editor.make()
 			.config((ctx) => {
+				if (output.length > 0) {
+					ctx.set(defaultValueCtx, output);
+					ctx.set(editorViewOptionsCtx, { editable: () => false });
+				} else {
+					ctx.set(defaultValueCtx, $input);
+				}
+
 				ctx.set(rootCtx, dom);
-				ctx.set(defaultValueCtx, $editorInput);
 				ctx.get(listenerCtx).markdownUpdated((ctx, markdown, prevMarkdown) => {
-					editorInput.update((input) => markdown);
+					input.update((input) => markdown);
 				});
 			})
 			.use(nord)
@@ -39,7 +46,7 @@
 	/>
 </svelte:head>
 
-<div use:editor />
+<div use:editor class:transparentBg={output.length > 0} />
 
 <style lang="sass">
 @use '../../vars'
@@ -59,4 +66,9 @@ div
 			margin: 0
 		:global(.editor .paragraph)
 			margin: 0
+	&.transparentBg 
+		:global(.milkdown)
+			background: transparent
+		:global(.editor)
+			background: transparent
 </style>

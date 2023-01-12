@@ -9,6 +9,7 @@
 	import DropdownItem from './DropdownItem.svelte';
 	import { isPopupVisible, editorInput, editorNoteKey, editorNoteTags } from './../../stores.js';
 	import { db } from '$src/db.js';
+	import Editor from './Editor.svelte';
 
 	export let note;
 
@@ -43,7 +44,7 @@
 				</DropdownItem>
 			</Dropdown>
 		</div>
-		<MdPreview><SvelteMarkdown source={note.text} options={svelteMarkdownOptions} /></MdPreview>
+		<Editor input={editorInput} output={note.text} />
 	</div>
 </div>
 
@@ -64,7 +65,8 @@
 				position: absolute
 				top: vars.$misc-padding-small
 				right: vars.$misc-padding-default
-		.tags
+				z-index: 1
+		/*.tags
 			background: vars.$color-dark-7
 			border-top: vars.$misc-border-default
 			border-bottom-left-radius: vars.$misc-borderRadius
@@ -81,5 +83,5 @@
 				height: 20px
 				line-height: 18px
 				display: flex
-				align-items: center
+				align-items: center*/
 </style>

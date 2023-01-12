@@ -1,9 +1,7 @@
 <script>
 	import Button from './Button.svelte';
-	import MdPreview from './MdPreview.svelte';
 	import Multiselect from './Multiselect.svelte';
 	import { isPopupVisible, editorNoteKey, editorInput, editorNoteTags } from '$src/stores.js';
-	import SvelteMarkdown from 'svelte-markdown';
 	import { Tag } from '$src/classes.js';
 	import { db } from '$src/db.js';
 	import { liveQuery } from 'dexie';
@@ -25,6 +23,7 @@
 
 	const saveNote = async () => {
 		const note = { text: $editorInput, tags: selectedTags.map((tag) => tag.name) };
+
 		let id;
 
 		//https://dexie.org/docs/Table/Table.put()
@@ -59,7 +58,7 @@
 	<div class="bg" aria-hidden="true">
 		<div class="popup">
 			<div class="top">
-				<Editor {editorInput} />
+				<Editor input={editorInput} />
 			</div>
 			<div class="bottom">
 				<Multiselect
