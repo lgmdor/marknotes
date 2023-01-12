@@ -8,7 +8,7 @@
 	import { clipboard } from '@milkdown/plugin-clipboard';
 	import { math } from '@milkdown/plugin-math';
 	import { listener, listenerCtx } from '@milkdown/plugin-listener';
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 
 	export let input;
 	export let output = '';
@@ -51,6 +51,12 @@
 
 	onMount(() => {
 		makeEditor();
+	});
+
+	onDestroy(async () => {
+		if (editorCurr) {
+			await editorCurr.destroy();
+		}
 	});
 </script>
 
