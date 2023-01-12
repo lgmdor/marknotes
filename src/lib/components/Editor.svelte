@@ -47,7 +47,6 @@
 				.use(listener)
 				.create();
 		}
-		console.log(editorCurr);
 	};
 
 	onMount(() => {
