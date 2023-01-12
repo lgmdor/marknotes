@@ -39,6 +39,7 @@
 		}
 
 		editorNoteKey.update((editorNoteKey) => null);
+
 		closePopup();
 	};
 
@@ -57,15 +58,8 @@
 	<!--<div class="bg" on:click|self={closePopup} aria-hidden="true">-->
 	<div class="bg" aria-hidden="true">
 		<div class="popup">
-			<div class="main">
-				<div class="wrap">
-					<Editor />
-				</div>
-				<div class="wrap">
-					<MdPreview>
-						<SvelteMarkdown source={$editorInput} options={svelteMarkdownOptions} />
-					</MdPreview>
-				</div>
+			<div class="top">
+				<Editor {editorInput} />
 			</div>
 			<div class="bottom">
 				<Multiselect
@@ -109,13 +103,9 @@
 		display: flex
 		flex-direction: column
 		box-shadow: vars.$misc-boxShadow
-		.main
-			display: flex
+		.top
 			flex: 1
-			.wrap
-				flex: 1
-				padding: 16px
-				border-left: vars.$misc-border-dark
+			padding: 16px
 		.bottom
 			height: vars.$size-4
 			display: flex

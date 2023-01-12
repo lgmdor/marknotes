@@ -31,6 +31,18 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@babel/core": "^7.20.12",
+		"@milkdown/core": "^6.5.4",
+		"@milkdown/plugin-clipboard": "^6.5.4",
+		"@milkdown/plugin-history": "^6.5.4",
+		"@milkdown/plugin-indent": "^6.5.4",
+		"@milkdown/plugin-listener": "^6.5.4",
+		"@milkdown/plugin-math": "^6.5.4",
+		"@milkdown/plugin-prism": "^6.5.4",
+		"@milkdown/preset-commonmark": "^6.5.4",
+		"@milkdown/preset-gfm": "^6.5.4",
+		"@milkdown/prose": "^6.5.4",
+		"@milkdown/theme-nord": "^6.5.4",
 		"dexie": "^3.2.2",
 		"svelte-bricks": "^0.1.7",
 		"svelte-markdown": "^0.2.3"

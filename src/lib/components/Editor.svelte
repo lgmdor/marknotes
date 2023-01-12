@@ -1,45 +1,62 @@
 <script>
-	import { editorInput } from '$src/stores.js';
-	import { onMount } from 'svelte';
+	import { Editor, rootCtx, defaultValueCtx } from '@milkdown/core';
+	import { gfm } from '@milkdown/preset-gfm';
+	import { nord } from '@milkdown/theme-nord';
+	import { history } from '@milkdown/plugin-history';
+	import { indent } from '@milkdown/plugin-indent';
+	import { prism } from '@milkdown/plugin-prism';
+	import { clipboard } from '@milkdown/plugin-clipboard';
+	import { math } from '@milkdown/plugin-math';
+	import { listener, listenerCtx } from '@milkdown/plugin-listener';
 
-	let editorElement;
+	export let editorInput;
 
-	onMount(() => {
-		editorElement.addEventListener('keydown', (e) => {
-			if (e.key === 'Tab') {
-				e.preventDefault();
-
-				editorElement.setRangeText(
-					'    ',
-					editorElement.selectionStart,
-					editorElement.selectionStart,
-					'end'
-				);
-			}
-		});
-	});
+	function editor(dom) {
+		Editor.make()
+			.config((ctx) => {
+				ctx.set(rootCtx, dom);
+				ctx.set(defaultValueCtx, $editorInput);
+				ctx.get(listenerCtx).markdownUpdated((ctx, markdown, prevMarkdown) => {
+					editorInput.update((input) => markdown);
+				});
+			})
+			.use(nord)
+			.use(gfm)
+			.use(history)
+			.use(indent)
+			.use(prism)
+			.use(clipboard)
+			.use(math)
+			.use(listener)
+			.create();
+	}
 </script>
 
-<textarea
-	class="md-editor"
-	placeholder="Write something..."
-	bind:value={$editorInput}
-	bind:this={editorElement}
-/>
+<svelte:head>
+	<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-material-oceanic.min.css"
+	/>
+</svelte:head>
+
+<div use:editor />
 
 <style lang="sass">
-	@use '../../vars'
+@use '../../vars'
 
-.md-editor
-	width: 100%
+div
 	height: 100%
-	resize: none
-	background: vars.$color-dark-7
-	border: none
-	outline: none
-	font-family: "Roboto Slab"
-	color: vars.$color-text-2
-	font-size: 1rem
-	line-height: calc(1em + 1ex)
-	//white-space: pre
+	:global(.milkdown)
+		height: 100%
+		box-shadow: none
+		:global(.editor)
+			height: 100%
+			outline: none
+			border: none
+			padding: 0
+			background: vars.$color-dark-7
+		:global(.editor>:first-child), :global(.editor>:last-child)
+			margin: 0
+		:global(.editor .paragraph)
+			margin: 0
 </style>

@@ -12,10 +12,11 @@
 		if ($tags) {
 			notes = liveQuery(() =>
 				db['notes']
-					.filter((note) =>
-						note.tags.some((tagNote) =>
-							$tags.filter((tagFilter) => tagFilter.isActive).some((tag) => tag.name === tagNote)
-						)
+					.filter(
+						(note) =>
+							note.tags.some((tagNote) =>
+								$tags.filter((tagFilter) => tagFilter.isActive).some((tag) => tag.name === tagNote)
+							) || note.tags.length == 0
 					)
 					.toArray()
 			);
