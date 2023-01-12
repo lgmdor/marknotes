@@ -18,6 +18,8 @@
 	const closePopup = (e) => {
 		isPopupVisible.update((isPopupVisible) => false);
 		editorInput.update((input) => '');
+		editorNoteTags.update((tags) => []);
+		editorNoteKey.update((key) => null);
 		selectedTags = [];
 	};
 

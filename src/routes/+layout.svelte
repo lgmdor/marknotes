@@ -15,4 +15,5 @@
   align-items: center
   flex-direction: column
   font-family: "Roboto"
+  padding-left: vars.$size-16
 </style>
