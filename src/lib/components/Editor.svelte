@@ -8,35 +8,51 @@
 	import { clipboard } from '@milkdown/plugin-clipboard';
 	import { math } from '@milkdown/plugin-math';
 	import { listener, listenerCtx } from '@milkdown/plugin-listener';
+	import { onMount } from 'svelte';
 
 	export let input;
 	export let output = '';
 
-	function editor(dom) {
-		Editor.make()
-			.config((ctx) => {
-				if (output.length > 0) {
-					ctx.set(defaultValueCtx, output);
-					ctx.set(editorViewOptionsCtx, { editable: () => false });
-				} else {
-					ctx.set(defaultValueCtx, $input);
-				}
+	let wrapper;
+	let editorCurr;
 
-				ctx.set(rootCtx, dom);
-				ctx.get(listenerCtx).markdownUpdated((ctx, markdown, prevMarkdown) => {
-					input.update((input) => markdown);
-				});
-			})
-			.use(nord)
-			.use(gfm)
-			.use(history)
-			.use(indent)
-			.use(prism)
-			.use(clipboard)
-			.use(math)
-			.use(listener)
-			.create();
-	}
+	$: output, makeEditor();
+
+	const makeEditor = async () => {
+		if (wrapper) {
+			if (editorCurr) {
+				await editorCurr.destroy();
+			}
+			editorCurr = await Editor.make()
+				.config((ctx) => {
+					if (output.length > 0) {
+						ctx.set(defaultValueCtx, output);
+						ctx.set(editorViewOptionsCtx, { editable: () => false });
+					} else {
+						ctx.set(defaultValueCtx, $input);
+					}
+
+					ctx.set(rootCtx, wrapper);
+					ctx.get(listenerCtx).markdownUpdated((ctx, markdown, prevMarkdown) => {
+						input.update((input) => markdown);
+					});
+				})
+				.use(nord)
+				.use(gfm)
+				.use(history)
+				.use(indent)
+				.use(prism)
+				.use(clipboard)
+				.use(math)
+				.use(listener)
+				.create();
+		}
+		console.log(editorCurr);
+	};
+
+	onMount(() => {
+		makeEditor();
+	});
 </script>
 
 <svelte:head>
@@ -46,7 +62,7 @@
 	/>
 </svelte:head>
 
-<div use:editor class:transparentBg={output.length > 0} />
+<div bind:this={wrapper} class:transparentBg={output.length > 0} />
 
 <style lang="sass">
 @use '../../vars'

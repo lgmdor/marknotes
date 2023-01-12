@@ -3,8 +3,6 @@
 	import IconTrash from '$lib/assets/icon_trash.svg?component';
 	// @ts-ignore
 	import IconEdit from '$lib/assets/icon_edit.svg?component';
-	import SvelteMarkdown from 'svelte-markdown';
-	import MdPreview from './MdPreview.svelte';
 	import Dropdown from './Dropdown.svelte';
 	import DropdownItem from './DropdownItem.svelte';
 	import { isPopupVisible, editorInput, editorNoteKey, editorNoteTags } from './../../stores.js';
@@ -18,12 +16,6 @@
 		editorInput.update((input) => note.text);
 		editorNoteKey.update((key) => note.id);
 		editorNoteTags.update((tags) => note.tags);
-	};
-
-	const svelteMarkdownOptions = {
-		//https://marked.js.org/using_advanced#options
-		headerIds: false,
-		breaks: true
 	};
 
 	const deleteNote = () => {

@@ -4,11 +4,11 @@
 	import { db } from '$src/db.js';
 	import Masonry from 'svelte-bricks';
 
-	let notes;
+	//let notes;
 
 	const tags = liveQuery(() => db['tags'].toArray());
 
-	const loadNotes = () => {
+	/*const loadNotes = () => {
 		if ($tags) {
 			notes = liveQuery(() =>
 				db['notes']
@@ -21,9 +21,11 @@
 					.toArray()
 			);
 		}
-	};
+	};*/
 
-	$: $tags, loadNotes();
+	//$: $tags, loadNotes();
+
+	const notes = liveQuery(() => db['notes'].toArray());
 
 	// https://www.npmjs.com/package/svelte-bricks#Props
 	const settings = {
