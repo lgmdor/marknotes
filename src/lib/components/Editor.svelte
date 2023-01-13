@@ -77,22 +77,41 @@ div
 	:global(.milkdown)
 		height: 100%
 		box-shadow: none
+		background: transparent
 		:global(.editor)
 			height: 100%
 			outline: none
 			border: none
 			padding: 0
-			background: vars.$color-dark-7
-		:global(.editor>:first-child), :global(.editor>:last-child)
-			margin: 0
+			background: transparent
+		:global(.editor>:first-child)
+			margin-top: 0
+		:global(.editor>:last-child)
+			margin-bottom: 0
 		:global(.editor .paragraph)
 			margin: 0
 		:global(.editor p)
 			line-height: calc(1em + 1ex)
-			letter-spacing: 0
-	&.transparentBg 
-		:global(.milkdown)
-			background: transparent
-		:global(.editor)
-			background: transparent
+		:global(.heading)
+			padding-bottom: 0.3em
+			margin-top: 24px
+			margin-bottom: 16px
+		:global(.editor h1)
+			border-bottom: 1px solid #ffffff22
+			font-size: 2em
+			letter-spacing: 0.25px
+		:global(.editor h2)
+			font-size: 1.5em
+		:global(.editor h3)
+			font-size: 1.25em
+		:global(.editor h4)
+			font-size: 1em
+		:global(.editor h5)
+			font-size: 0.875em
+		:global(.editor h6)
+			font-size: 0.85em
+			color: vars.$color-text-3
+
+		:global(p), :global(ul), :global(ol), :global(pre), :global(table), :global(hr)
+			margin-bottom: 16px
 </style>
