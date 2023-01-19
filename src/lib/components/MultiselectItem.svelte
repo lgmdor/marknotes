@@ -37,6 +37,9 @@
   cursor: default
   .wrap
     cursor: pointer
+    display: flex
+    align-items: center
+    justify-content: flex-end
   &:not(:last-child)
     margin-right: 12px
   :global(svg)
